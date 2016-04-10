@@ -13,6 +13,7 @@
 -->
 
 <!DOCTYPE Profile [
+  <!ENTITY Version "Katana v.1.0.0">
   <!ENTITY RepairEnable "1">
   <!ENTITY EnableMatFarming "1">
   <!ENTITY CraftCount "1"> <!-- Amount to Craft before Desynth Cycle -->
@@ -90,7 +91,7 @@
       </If>
 
       <While Condition="not HasAtLeast(8704,&CraftCount;) and FreeItemSlots() &gt; 1">
-        <Synthesize RecipeId="2065" RequiredSkills="279" MinimumCp="138" HQMats="-1, -1, -1"/>
+        <Synthesize RecipeId="2065" MinimumCp="52" HQMats="-1, -1, -1"/>
         <While Condition="CraftingManager.IsCrafting">
           <CraftAction Name="Steady Hand" ActionId="247"/>
           <CraftAction Name="Standard Synthesis" ActionId="100080"/>
