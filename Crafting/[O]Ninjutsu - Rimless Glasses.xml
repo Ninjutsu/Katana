@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Author: Savannah
+  Required Classes:
+  GSM at 50+ - Rimless Glasses Recipe
+  A combat class able to effectively farm lvl 50 mobs
+  If you want to farm the mats yourself.
+
+  Required Aetherytes:
+  Wineport
+  Ul'Dah
+  Ul'Dah Aetheryte Shards
+-->
+
+<!DOCTYPE Profile [
+  <!ENTITY RepairEnable "1">
+  <!ENTITY EnableMatFarming "1">
+  <!ENTITY CraftCount "1"> <!-- Amount to Craft before Desynth Cycle -->
+  <!ENTITY FC3Count "1"> <!-- Amount of FieldCraft III's -->
+]>
+
+<Profile>
+  <Name>Ninjutsu: Rimless Glasses - &Version;</Name>
+  <Author>Savannah</Author>
+  <CodeChunks>
+    <CodeChunk name="KungFu"> <!-- Combat Gearset -->
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+        ff14bot.Managers.ChatManager.SendChat("/gs change 33");
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+      ]]>
+    </CodeChunk>
+    <CodeChunk name="GemFu"> <!-- Goldsmith Gearset -->
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+        ff14bot.Managers.ChatManager.SendChat("/gs change 12");
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+  <Order>
+    <While Condition="not HasAtLeast(5104,&FC3Count;)">
+      <!-- Castrum Occidens -->
+      <If condition="&EnableMatFarming; != 0 and not HasAtLeast(5104,&CraftCount;) and not HasAtLeast(14217,&CraftCount;) and FreeItemSlots() &gt; 10">
+        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Teleporting to Wineport!"/>
+        <If Condition="not IsOnMap(137)">
+          <TeleportTo Name="Wineport" AetheryteId="12"/>
+          <If Condition="&RepairEnable; == 1">
+            <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Assets Check!"/>
+            <ExMoveTo Name="Entrance" XYZ="-27.31726, 70.38657, -18.98744"/>
+            <ExMoveTo Name="Merchant &amp; Mender" XYZ="-37.58301, 71.75401, -39.62775"/>
+            <RunCode Name="GemFu"/>
+            <NPCRepair NpcID="1003262" DialogOption="4"/>
+            <RunCode Name="KungFu"/>
+            <NPCRepair NpcID="1003262" DialogOption="4"/>
+            <ExMoveTo Name="Entrance" XYZ="-27.31726, 70.38657, -18.98744"/>
+          </If>
+          <RunCode Name="KungFu"/>
+        </If>
+        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Moving to Castrum Occidens!"/>
+        <NoCombatMoveTo Name="Castrum Occidens" XYZ="388.0829, 76.50455, -24.41431"/>
+        <Grind grindRef="Castrum Occidens" while="not HasAtLeast(5104,&CraftCount;) and not HasAtLeast(14217,&CraftCount;) and FreeItemSlots() &gt; 1"/>
+      </If>
+      <!-- Crafting -->
+      <If Condition="not IsOnMap(130) and not IsOnMap(131)">
+        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Teleporting to Ul'Dah!"/>
+        <TeleportTo Name="Ul'Dah - Steps of Nald" AetheryteId="9"/>
+        <If Condition="&RepairEnable; == 1 and &EnableMatFarming; == 0">
+          <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Ninja Maintenance!"/>
+          <RunCode Name="SapphireAvenue"/>
+          <RunCode Name="GemFu"/>
+          <ExMoveTo Name="Independent Arms Mender" XYZ="139.0188, 4, -9.107752"/>
+          <NPCRepair NpcID="1004420"/>
+          <WaitTimer waitTime="5"/>
+          <ExMoveTo Name="Aethernet Shard" XYZ="89.64673, 12.92438, 58.27417"/>
+          <RunCode Name="GSMGuild2"/>
+        </If>
+      </If>
+      <If Condition="&EnableMatFarming; == 1 or &RepairEnable; == 0 and IsOnMap(130)">
+        <RunCode Name="GSMGuild"/>
+      </If>
+      <If Condition="IsOnMap(131)">
+        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Material Supplies And Junk Selling!"/>
+        <ExMoveTo Name="Aistan" XYZ="-33.91927, 13.59995, 99.11154"/>
+        <WaitTimer waitTime="5"/>
+        <RunCode Name="GilFu"/>
+        <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" xyz="-33.58521, 13.59985, 96.42175"/>
+        <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" xyz="-33.58521, 13.59985, 96.42175"/>
+        <RunCode Name="GemFu"/>
+      </If>
+
+      <While Condition="not HasAtLeast(8704,&CraftCount;) and FreeItemSlots() &gt; 1">
+        <Synthesize RecipeId="2065" RequiredSkills="279" MinimumCp="138" HQMats="-1, -1, -1"/>
+        <While Condition="CraftingManager.IsCrafting">
+          <CraftAction Name="Steady Hand" ActionId="247"/>
+          <CraftAction Name="Standard Synthesis" ActionId="100080"/>
+          <CraftAction Name="Standard Synthesis" ActionId="100080"/>
+        </While>
+      </While>
+      <StopCrafting/>
+      <!-- Desynth -->
+      <While Condition="ItemCount(8704) &gt; 0">
+        <ExSalvage ItemIds="8704" NqOnly="False" IncludeArmory="False"/>
+      </While>
+    </While>
+    <If Condition="&EnableMatFarming; == 0 and not HasAtLeast(14,1) or not HasAtLeast(16,1) or not HasAtLeast(5340,1) or not HasAtLeast(5104,1) or not HasAtLeast(5512,2)">
+      <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have run out of Materials or Inventory space Senpai!"/>
+    </If>
+    <If Condition="HasAtLeast(8150,&FC3Count;)">
+      <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have farmed your desired amount of FieldCraft III's Senpai!"/>
+    </If>
+  </Order>
+  <CodeChunks>
+    <CodeChunk Name="GilFu">
+      <![CDATA[
+        // Junk List
+        List<int> junkIds = new List<int>() {
+        2931,     // Legionary Visor
+        5105,     // Garlean Steel Plate
+        5533,     // Garlean Rubber
+        8144      // Clear Demimateria III
+        };
+
+        var itemList = ff14bot.Managers.InventoryManager.FilledSlots;
+        var items = itemList.Where(i => junkIds.Contains((int)i.RawItemId));
+        if (items  != null)
+        {
+          GameObjectManager.GetObjectByNPCId(1004419).Interact();
+          await Coroutine.Wait(1000, () => Shop.Open);
+
+          while (Shop.Open)
+          {
+            foreach(var item in items)
+            {
+              await CommonTasks.SellItem(item);
+              await Buddy.Coroutines.Coroutine.Sleep(500);
+            }
+            await Coroutine.Sleep(500);
+            Shop.Close();
+            await Coroutine.Sleep(500);
+          }
+        }
+      ]]>
+    </CodeChunk>
+    <CodeChunk Name="GSMGuild">
+      <![CDATA[
+        ff14bot.Managers.GameObjectManager.GetObjectByNPCId(9).Interact();
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(0);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(6);
+          await Buddy.Coroutines.Coroutine.Sleep(5000);
+      ]]>
+    </CodeChunk>
+    <CodeChunk Name="GSMGuild2">
+      <![CDATA[
+        ff14bot.Managers.GameObjectManager.GetObjectByNPCId(47).Interact();
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(6);
+          await Buddy.Coroutines.Coroutine.Sleep(5000);
+      ]]>
+    </CodeChunk>
+    <CodeChunk Name="SapphireAvenue">
+      <![CDATA[
+        ff14bot.Managers.GameObjectManager.GetObjectByNPCId(9).Interact();
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(0);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(5);
+          await Buddy.Coroutines.Coroutine.Sleep(5000);
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+  <GrindAreas>
+    <GrindArea name="Castrum Occidens">
+      <Hotspots>
+        <Hotspot Radius="250" XYZ="388.0829, 76.50455, -24.41431" name="Castrum Occidens"/>
+        <Hotspot Radius="250" XYZ="447.287, 76.17845, -74.59468" name="Castrum Occidens"/>
+        <Hotspot Radius="250" XYZ="376.2453, 76.37648, -80.4966" name="Castrum Occidens"/>
+      </Hotspots>
+      <TargetMobs>
+        <TargetMob Name="2nd Cohort Vanguard" Id="1826"/>
+        <TargetMob Name="2nd Cohort Eques" Id="1823"/>
+        <!-- <TargetMob Name="2nd Cohort Signifer" Id="1825"/> -->
+        <TargetMob Name="2nd Cohort Hoplomachus" Id="1821"/>
+        <TargetMob Name="2nd Cohort Laquearius" Id="1822"/>
+        <TargetMob Name="2nd Cohort Secutor" Id="1824"/>
+      </TargetMobs>
+      <MinLevel>1</MinLevel>
+      <MaxLevel>61</MaxLevel>
+    </GrindArea>
+  </GrindAreas>
+</Profile>
