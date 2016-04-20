@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Author: Savannah
   Required Classes:
@@ -13,7 +13,7 @@
 -->
 
 <!DOCTYPE Profile [
-  <!ENTITY Version "Katana v.1.0.0">
+  <!ENTITY Version "Katana v1.0">
   <!ENTITY RepairEnable "1">
   <!ENTITY EnableMatFarming "1">
   <!ENTITY CraftCount "1"> <!-- Amount to Craft before Desynth Cycle -->
@@ -85,8 +85,8 @@
         <ExMoveTo Name="Aistan" XYZ="-33.91927, 13.59995, 99.11154"/>
         <WaitTimer waitTime="5"/>
         <RunCode Name="GilFu"/>
-        <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" xyz="-33.58521, 13.59985, 96.42175"/>
-        <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" xyz="-33.58521, 13.59985, 96.42175"/>
+        <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" XYZ="-33.58521, 13.59985, 96.42175"/>
+        <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" XYZ="-33.58521, 13.59985, 96.42175"/>
         <RunCode Name="GemFu"/>
       </If>
 
