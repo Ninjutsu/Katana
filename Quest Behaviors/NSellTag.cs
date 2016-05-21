@@ -128,7 +128,7 @@ namespace ff14bot.NeoProfiles
         private async Task<bool> SellItems()
         {
             var itemList = InventoryManager.FilledSlots;
-            var items = itemList.Where(i => SellIds.Contains((int)i.RawItemId));
+            var items = itemList.Where(i => Enumerable.Contains(SellIds, (int)i.RawItemId));
             while (Ninja.HasTarget && WindowsOpen())
             {
                 if (SelectIconString.IsOpen)
