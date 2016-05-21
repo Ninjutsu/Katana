@@ -19,8 +19,7 @@
   <Name>Ninjutsu: Catkiller - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <!-- Fisher Gearset -->
-    <CodeChunk name="FishFu">
+    <CodeChunk name="FishFu"> <!-- Fisher Gearset -->
       <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(3000);
         ff14bot.Managers.ChatManager.SendChat("/gs change 6");
