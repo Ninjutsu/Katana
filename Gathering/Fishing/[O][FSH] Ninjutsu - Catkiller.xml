@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Profile [  
+<!ENTITY Version "Katana">
+<!ENTITY RepairEnable "1">
+<!ENTITY FishCount "198">
+<!ENTITY MinFish "15">
+<!ENTITY MaxFish "25">
+<!ENTITY SitRate "0.42">
+<!ENTITY MeditationSpot "60">
+
+<!ENTITY ShopPurchase1 "BruteLeech">
+<!ENTITY ShopPurchase1_Count "198">
+<!ENTITY ShopPurchase2 "CraneFly">
+<!ENTITY ShopPurchase2_Count "198">
+<!ENTITY ShopPurchase3 "HiCordial">
+<!ENTITY ShopPurchase3_Count "66">
+]>
+<Profile>
+  <Name>Ninjutsu: Catkiller - &Version;</Name>
+  <Author>Savannah</Author>
+  <CodeChunks>
+    <!-- Fisher Gearset -->
+    <CodeChunk name="FishFu">
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+        ff14bot.Managers.ChatManager.SendChat("/gs change 6");
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+  <Order>
+    <If Condition="not HasAtLeast(12829,&FishCount;)">
+      <ExLog Color="#00FFFF" Message="Plugins and Gear check!"/>
+      <If Condition="Core.Me.CurrentJob != ClassJobType.Fisher">
+        <RunCode Name="FishFu"/>
+        <WaitTimer waitTime="3"/>
+      </If>
+    </If>
+    <While Condition="not HasAtLeast(12829,&FishCount;) and(SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(2), 1, 2))">
+      <If Condition="not IsOnMap(401)">
+        <TeleportTo Name="Camp Cloudtop" AetheryteId="72" />
+        <ExEnablePlugins Names="Skywatcher,EnableFlight"/>
+        <WaitTimer waitTime="3"/>
+        <ExLog Color="#00FFFF" Message="Ninja Maintenance!"/>
+        <If Condition="&RepairEnable; == 1">
+          <ExMoveTo Name="Mender of Wreckage" XYZ="-650.1412, -123.7568, 525.9631"/>
+          <NPCRepair NpcID="1011948" DialogOption="4"/>
+          <WaitTimer waitTime="5"/>
+        </If>
+      </If>
+      <ExLog Color="#00FFFF" Message="Re-Checking Target Parameters!"/>
+      <If Condition="IsOnMap(401) and(SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2))">
+        <ExLog Color="#00FFFF" Message="Moving to the Eddies."/>
+        <ExMoveTo Name="The Eddies" XYZ="412.5382, -186.4223, 825.4359"/>
+        <RunCode Name="Dismount"/>
+        <WaitTimer waitTime="2"/>
+        <ExDisablePlugins Names="EnableFlight"/>
+      </If>
+      <Fish Mooch="1" BaitDelay="500" Patience="Patience" Snagging="False" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" Condition="SkywatcherPlugin.IsWeatherInZone(401, 1, 2)">
+        <Baits>
+          <Bait name="Brute Leech"/>
+        </Baits>
+        <PatienceTugs>
+          <PatienceTug moochLevel="0" TugType="Heavy"/>
+          <PatienceTug moochLevel="1" TugType="Heavy"/>
+        </PatienceTugs>
+        <Keepers>
+          <Keeper name="Catkiller"/>
+        </Keepers>
+        <FishSpots>
+          <FishSpot XYZ="477.2881, -186.5801, 810.614" Heading="0,0.004754543" SitRate="&SitRate;" />
+          <FishSpot XYZ="500.5081, -186.0173, 835.7986" Heading="0,5.448086" SitRate="&SitRate;" />
+          <FishSpot XYZ="409.2897, -186.5656, 869.4892" Heading="0,2.435976" SitRate="&SitRate;" />
+          <FishSpot XYZ="430.2968, -186.3147, 885.5862" Heading="0,2.743285" SitRate="&SitRate;" />
+        </FishSpots>
+      </Fish>
+    </While>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <While Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2)">
+      <ExLog Color="#00FFFF" message="Illuminati Perch fishing!"/>
+      <If condition="not IsOnMap(399)">
+        <TeleportTo name="Idyllshire" aetheryteId="75"/>
+        <ExEnablePlugins Names="Skywatcher,EnableFlight"/>
+        <ExLog Color="#00FFFF" Message="Dravanian Hinterlands: Illuminati Perch - Blue Scrip!"/>
+        <RunCode Name="Nudge"/>
+        <RunCode Name="UseAethernet"/>
+      </If>
+      <ExMoveTo XYZ="-136.0699, 100.6697, -177.1059"/>
+      <RunCode Name="Dismount"/>
+      <WaitTimer waitTime="2"/>
+      <ExDisablePlugins Names="EnableFlight"/>
+      <Fish Mooch="1" MinFish="&MinFish;" MaxFish="&MaxFish;" Patience="Patience" ShuffleFishSpots="True" SitRate="&SitRate;" Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) and FreeItemSlots() &gt; 3">
+        <Baits>
+          <Bait name="Brute Leech" Condition="Core.Player.HasAura(850)"/>
+          <Bait name="Goblin Jig"/>
+        </Baits>
+        <Collectables>
+          <Collectable name="Illuminati Perch" value="826"/>
+        </Collectables>
+        <PatienceTugs>
+          <PatienceTug moochLevel="0" TugType="Light"/>
+          <PatienceTug moochLevel="0" TugType="Medium"/>
+          <PatienceTug moochLevel="1" TugType="Medium"/>
+        </PatienceTugs>
+        <Keepers>
+          <Keeper name="Illuminati Perch"/>
+        </Keepers>
+        <FishSpots>
+          <FishSpot XYZ="-150.4037, 100.5628, -165.1706" Heading="0,5.077335"/>
+          <FishSpot XYZ="-141.433, 100.5589, -141.2495" Heading="0,4.676731"/>
+          <FishSpot XYZ="-131.7577, 100.3345, -122.3618" Heading="0,5.53486"/>
+          <FishSpot XYZ="-123.343, 100.4187, -114.0624" Heading="0,6.142892"/>
+          <FishSpot XYZ="-66.846, 100.4848, -122.7405" Heading="0,1.441207"/>
+          <FishSpot XYZ="-45.43608, 100.5335, -140.3373" Heading="0,0.9610033"/>
+          <FishSpot XYZ="6.77405, 100.901, -146.2005" Heading="0,0.7509502"/>
+        </FishSpots>
+      </Fish>
+    </While>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <If Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) and IsTimeBetween(9,10)">
+      <ExLog Color="#00FFFF" Message="Collectable Handins."/>
+      <TeleportTo name="Idyllshire" aetheryteId="75"/>
+      <TurnInCollectables location="Idyllshire" forcePurchase="False">
+        <Collectables>
+          <CollectableTurnIn name="Illuminati Perch" value="826"/>
+        </Collectables>
+        <ShopPurchases>
+          <ShopPurchase shopItem="&ShopPurchase1;" maxCount="&ShopPurchase1_Count;"/>
+          <ShopPurchase shopItem="&ShopPurchase2;" maxCount="&ShopPurchase2_Count;"/>
+          <ShopPurchase shopItem="&ShopPurchase3;" maxCount="&ShopPurchase3_Count;"/>
+        </ShopPurchases>
+      </TurnInCollectables>
+    </If>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <If Condition="HasAtLeast(12829,&FishCount;)">
+      <ExLog Color="#00FFFF" Message="You've assassinated &FishCount;+ Catkillers Sempai!"/>
+      <TeleportTo Name="Kuji Kiri" AetheryteId="&MeditationSpot;"/>
+    </If>
+  </Order>
+  <CodeChunks>
+    <CodeChunk Name="Nudge">
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(500);
+          ff14bot.Managers.MovementManager.MoveForwardStart();
+        await Buddy.Coroutines.Coroutine.Sleep(1000);
+          ff14bot.Managers.MovementManager.MoveForwardStop();
+        await Buddy.Coroutines.Coroutine.Sleep(500);
+        ]]>
+    </CodeChunk>
+    <CodeChunk Name="UseAethernet">
+      <![CDATA[
+        ff14bot.Managers.GameObjectManager.GetObjectByNPCId(75).Interact();
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(0);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
+        if (ff14bot.RemoteWindows.SelectString.IsOpen) ff14bot.RemoteWindows.SelectString.ClickSlot(2);
+          await Buddy.Coroutines.Coroutine.Sleep(5000);
+      ]]>
+    </CodeChunk>
+    <CodeChunk name="Dismount">
+      <![CDATA[
+        var result = true;
+        if (MovementManager.IsFlying) { result = await CommonTasks.Land();
+          await Buddy.Coroutines.Coroutine.Sleep(1000);
+        }
+        if (result && Core.Player.IsMounted) { Actionmanager.Dismount();
+          await Buddy.Coroutines.Coroutine.Sleep(1000);
+        }
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+</Profile>
