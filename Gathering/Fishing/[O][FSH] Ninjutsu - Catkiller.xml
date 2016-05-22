@@ -68,7 +68,7 @@
         </Keepers>
         <FishSpots>
           <FishSpot XYZ="477.2881, -186.5801, 810.614" Heading="0,0.004754543" SitRate="&SitRate;" />
-          <FishSpot XYZ="500.5081, -186.0173, 835.7986" Heading="0,5.448086" SitRate="&SitRate;" />
+          <!-- <FishSpot XYZ="500.5081, -186.0173, 835.7986" Heading="0,5.448086" SitRate="&SitRate;" /> -->
           <FishSpot XYZ="409.2897, -186.5656, 869.4892" Heading="0,2.435976" SitRate="&SitRate;" />
           <FishSpot XYZ="430.2968, -186.3147, 885.5862" Heading="0,2.743285" SitRate="&SitRate;" />
         </FishSpots>
