@@ -6,7 +6,7 @@
 <!ENTITY MinFish "15">
 <!ENTITY MaxFish "25">
 <!ENTITY SitRate "0.42">
-<!ENTITY MeditationSpot "60">
+<!ENTITY MeditationSpot "8">
 
 <!ENTITY ShopPurchase1 "BruteLeech">
 <!ENTITY ShopPurchase1_Count "198">
@@ -19,8 +19,7 @@
   <Name>Ninjutsu: Catkiller - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <!-- Fisher Gearset -->
-    <CodeChunk name="FishFu">
+    <CodeChunk name="FishFu"> <!-- Fisher Gearset -->
       <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(3000);
         ff14bot.Managers.ChatManager.SendChat("/gs change 6");
@@ -33,7 +32,6 @@
       <ExLog Color="#00FFFF" Message="Plugins and Gear check!"/>
       <If Condition="Core.Me.CurrentJob != ClassJobType.Fisher">
         <RunCode Name="FishFu"/>
-        <WaitTimer waitTime="3"/>
       </If>
     </If>
     <While Condition="not HasAtLeast(12829,&FishCount;) and(SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(2), 1, 2))">
@@ -53,10 +51,9 @@
         <ExLog Color="#00FFFF" Message="Moving to the Eddies."/>
         <ExMoveTo Name="The Eddies" XYZ="412.5382, -186.4223, 825.4359"/>
         <RunCode Name="Dismount"/>
-        <WaitTimer waitTime="2"/>
         <ExDisablePlugins Names="EnableFlight"/>
       </If>
-      <Fish Mooch="1" BaitDelay="500" Patience="Patience" Snagging="False" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" Condition="SkywatcherPlugin.IsWeatherInZone(401, 1, 2)">
+      <Fish Mooch="1" BaitDelay="500" Patience="Patience" Snagging="False" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" Condition="SkywatcherPlugin.IsWeatherInZone(401, 1, 2) and HasAtLeast(12711,1)">
         <Baits>
           <Bait name="Brute Leech"/>
         </Baits>
@@ -69,14 +66,14 @@
         </Keepers>
         <FishSpots>
           <FishSpot XYZ="477.2881, -186.5801, 810.614" Heading="0,0.004754543" SitRate="&SitRate;" />
-          <FishSpot XYZ="500.5081, -186.0173, 835.7986" Heading="0,5.448086" SitRate="&SitRate;" />
+          <!-- <FishSpot XYZ="500.5081, -186.0173, 835.7986" Heading="0,5.448086" SitRate="&SitRate;" /> -->
           <FishSpot XYZ="409.2897, -186.5656, 869.4892" Heading="0,2.435976" SitRate="&SitRate;" />
           <FishSpot XYZ="430.2968, -186.3147, 885.5862" Heading="0,2.743285" SitRate="&SitRate;" />
         </FishSpots>
       </Fish>
     </While>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <While Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2)">
+    <While Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) or ItemCount(12711) &lt; 1">
       <ExLog Color="#00FFFF" message="Illuminati Perch fishing!"/>
       <If condition="not IsOnMap(399)">
         <TeleportTo name="Idyllshire" aetheryteId="75"/>
@@ -87,7 +84,6 @@
       </If>
       <ExMoveTo XYZ="-136.0699, 100.6697, -177.1059"/>
       <RunCode Name="Dismount"/>
-      <WaitTimer waitTime="2"/>
       <ExDisablePlugins Names="EnableFlight"/>
       <Fish Mooch="1" MinFish="&MinFish;" MaxFish="&MaxFish;" Patience="Patience" ShuffleFishSpots="True" SitRate="&SitRate;" Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) and FreeItemSlots() &gt; 3">
         <Baits>
@@ -161,10 +157,10 @@
       <![CDATA[
         var result = true;
         if (MovementManager.IsFlying) { result = await CommonTasks.Land();
-          await Buddy.Coroutines.Coroutine.Sleep(1000);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
         }
         if (result && Core.Player.IsMounted) { Actionmanager.Dismount();
-          await Buddy.Coroutines.Coroutine.Sleep(1000);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
         }
       ]]>
     </CodeChunk>
