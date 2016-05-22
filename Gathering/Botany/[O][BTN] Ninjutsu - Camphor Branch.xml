@@ -3,7 +3,7 @@
 <!DOCTYPE Profile [
   <!ENTITY Version "Katana">
   <!ENTITY SkipWindowDelay "1500">
-  <!ENTITY MeditationSpot "60">
+  <!ENTITY MeditationSpot "8">
   <!ENTITY BranchCount "495">
 ]>
 
