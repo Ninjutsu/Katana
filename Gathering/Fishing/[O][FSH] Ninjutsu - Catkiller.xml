@@ -32,7 +32,6 @@
       <ExLog Color="#00FFFF" Message="Plugins and Gear check!"/>
       <If Condition="Core.Me.CurrentJob != ClassJobType.Fisher">
         <RunCode Name="FishFu"/>
-        <WaitTimer waitTime="3"/>
       </If>
     </If>
     <While Condition="not HasAtLeast(12829,&FishCount;) and(SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(2), 1, 2))">
@@ -52,7 +51,6 @@
         <ExLog Color="#00FFFF" Message="Moving to the Eddies."/>
         <ExMoveTo Name="The Eddies" XYZ="412.5382, -186.4223, 825.4359"/>
         <RunCode Name="Dismount"/>
-        <WaitTimer waitTime="2"/>
         <ExDisablePlugins Names="EnableFlight"/>
       </If>
       <Fish Mooch="1" BaitDelay="500" Patience="Patience" Snagging="False" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" Condition="SkywatcherPlugin.IsWeatherInZone(401, 1, 2) and HasAtLeast(12711,1)">
@@ -86,7 +84,6 @@
       </If>
       <ExMoveTo XYZ="-136.0699, 100.6697, -177.1059"/>
       <RunCode Name="Dismount"/>
-      <WaitTimer waitTime="2"/>
       <ExDisablePlugins Names="EnableFlight"/>
       <Fish Mooch="1" MinFish="&MinFish;" MaxFish="&MaxFish;" Patience="Patience" ShuffleFishSpots="True" SitRate="&SitRate;" Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) and FreeItemSlots() &gt; 3">
         <Baits>
@@ -160,10 +157,10 @@
       <![CDATA[
         var result = true;
         if (MovementManager.IsFlying) { result = await CommonTasks.Land();
-          await Buddy.Coroutines.Coroutine.Sleep(1000);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
         }
         if (result && Core.Player.IsMounted) { Actionmanager.Dismount();
-          await Buddy.Coroutines.Coroutine.Sleep(1000);
+          await Buddy.Coroutines.Coroutine.Sleep(2000);
         }
       ]]>
     </CodeChunk>
