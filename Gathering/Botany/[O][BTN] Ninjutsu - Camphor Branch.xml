@@ -20,7 +20,7 @@
     </CodeChunk>
   </CodeChunks>
   <Order>
-    <While Condition="not HasAtLeast(14160,&BranchCount;) and FreeItemSlots() &gt; 2">
+    <While Condition="not HasAtLeast(14160,&BranchCount;) and FreeItemSlots() &gt; 5">
       <ExEnablePlugins Names="Skywatcher,EnableFlight"/>
       <ExLog Color="#00FFFF" Message="Teleporting to Moghome Sempai!"/>
       <If Condition="not IsOnMap(400)">
