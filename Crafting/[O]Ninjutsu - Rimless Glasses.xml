@@ -5,23 +5,27 @@
   GSM at 50+ - Rimless Glasses Recipe
   A combat class able to effectively farm lvl 50 mobs
   If you want to farm the mats yourself.
-
-  Required Aetherytes:
-  Wineport
-  Ul'Dah
-  Ul'Dah Aetheryte Shards
 -->
 
 <!DOCTYPE Profile [
-  <!ENTITY Version "Katana v1.0">
-  <!ENTITY RepairEnable "1">
+  <!ENTITY Version "Katana">
+  <!ENTITY SelfRepairEnable "0">
+  <!ENTITY SellItems "0">
   <!ENTITY EnableMatFarming "1">
+  
+  <!-- Area To Farm Materials (WIP) -->
+  <!ENTITY CastrumOccidens "0">
+  <!ENTITY CastrumOccidens "0">
+  <!ENTITY CastrumOccidens "0">
+  <!ENTITY CastrumOccidens "0">  
+  
   <!ENTITY CraftCount "1"> <!-- Amount to Craft before Desynth Cycle -->
   <!ENTITY FC3Count "1"> <!-- Amount of FieldCraft III's -->
 ]>
 
 <Profile>
   <Name>Ninjutsu: Rimless Glasses - &Version;</Name>
+  <BehaviorDirectory>../Quest Behaviors</BehaviorDirectory>
   <Author>Savannah</Author>
   <CodeChunks>
     <CodeChunk name="KungFu"> <!-- Combat Gearset -->
@@ -42,12 +46,12 @@
   <Order>
     <While Condition="not HasAtLeast(5104,&FC3Count;)">
       <!-- Castrum Occidens -->
-      <If condition="&EnableMatFarming; != 0 and not HasAtLeast(5104,&CraftCount;) and not HasAtLeast(14217,&CraftCount;) and FreeItemSlots() &gt; 10">
-        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Teleporting to Wineport!"/>
+      <If condition="&EnableMatFarming; != 0 and &CastrumOccidens; != 0 and not HasAtLeast(5104,&CraftCount;) and not HasAtLeast(14217,&CraftCount;) and FreeItemSlots() &gt; 10">
+        <ExLog Color="#00FFFF" Message="Teleporting to Wineport!"/>
         <If Condition="not IsOnMap(137)">
           <TeleportTo Name="Wineport" AetheryteId="12"/>
-          <If Condition="&RepairEnable; == 1">
-            <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Assets Check!"/>
+          <If Condition="&SelfRepairEnable; == 1">
+            <ExLog Color="#00FFFF" Message="Assets Check!"/>
             <ExMoveTo Name="Entrance" XYZ="-27.31726, 70.38657, -18.98744"/>
             <ExMoveTo Name="Merchant &amp; Mender" XYZ="-37.58301, 71.75401, -39.62775"/>
             <RunCode Name="GemFu"/>
@@ -58,16 +62,16 @@
           </If>
           <RunCode Name="KungFu"/>
         </If>
-        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Moving to Castrum Occidens!"/>
+        <ExLog Color="#00FFFF" Message="Moving to Castrum Occidens!"/>
         <NoCombatMoveTo Name="Castrum Occidens" XYZ="388.0829, 76.50455, -24.41431"/>
         <Grind grindRef="Castrum Occidens" while="not HasAtLeast(5104,&CraftCount;) and not HasAtLeast(14217,&CraftCount;) and FreeItemSlots() &gt; 1"/>
       </If>
       <!-- Crafting -->
       <If Condition="not IsOnMap(130) and not IsOnMap(131)">
-        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Teleporting to Ul'Dah!"/>
+        <ExLog Color="#00FFFF" Message="Teleporting to Ul'Dah!"/>
         <TeleportTo Name="Ul'Dah - Steps of Nald" AetheryteId="9"/>
-        <If Condition="&RepairEnable; == 1 and &EnableMatFarming; == 0">
-          <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Ninja Maintenance!"/>
+        <If Condition="&SelfRepairEnable; == 1 and &EnableMatFarming; == 0">
+          <ExLog Color="#00FFFF" Message="Ninja Maintenance!"/>
           <RunCode Name="SapphireAvenue"/>
           <RunCode Name="GemFu"/>
           <ExMoveTo Name="Independent Arms Mender" XYZ="139.0188, 4, -9.107752"/>
@@ -81,10 +85,10 @@
         <RunCode Name="GSMGuild"/>
       </If>
       <If Condition="IsOnMap(131)">
-        <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Material Supplies And Junk Selling!"/>
-        <ExMoveTo Name="Aistan" XYZ="-33.91927, 13.59995, 99.11154"/>
-        <WaitTimer waitTime="5"/>
-        <RunCode Name="GilFu"/>
+        <ExLog Color="#00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Material Supplies And Junk Selling!"/>
+        <If Condition="&SellItems; != 0">
+          <NSellItems Name="Aistan" SellIds="2931, 5105, 5533, 8144" NpcId="1004419" XYZ="-33.91927, 13.59995, 99.11154"/>
+        </If>
         <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" XYZ="-33.58521, 13.59985, 96.42175"/>
         <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" XYZ="-33.58521, 13.59985, 96.42175"/>
         <RunCode Name="GemFu"/>
@@ -105,44 +109,13 @@
       </While>
     </While>
     <If Condition="&EnableMatFarming; == 0 and not HasAtLeast(14,1) or not HasAtLeast(16,1) or not HasAtLeast(5340,1) or not HasAtLeast(5104,1) or not HasAtLeast(5512,2)">
-      <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have run out of Materials or Inventory space Senpai!"/>
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have run out of Materials or Inventory space Senpai!"/>
     </If>
     <If Condition="HasAtLeast(8150,&FC3Count;)">
-      <ExLog Color="#FF00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have farmed your desired amount of FieldCraft III's Senpai!"/>
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have farmed your desired amount of FieldCraft III's Senpai!"/>
     </If>
   </Order>
   <CodeChunks>
-    <CodeChunk Name="GilFu">
-      <![CDATA[
-        // Junk List
-        List<int> junkIds = new List<int>() {
-        2931,     // Legionary Visor
-        5105,     // Garlean Steel Plate
-        5533,     // Garlean Rubber
-        8144      // Clear Demimateria III
-        };
-
-        var itemList = ff14bot.Managers.InventoryManager.FilledSlots;
-        var items = itemList.Where(i => junkIds.Contains((int)i.RawItemId));
-        if (items  != null)
-        {
-          GameObjectManager.GetObjectByNPCId(1004419).Interact();
-          await Coroutine.Wait(1000, () => Shop.Open);
-
-          while (Shop.Open)
-          {
-            foreach(var item in items)
-            {
-              await CommonTasks.SellItem(item);
-              await Buddy.Coroutines.Coroutine.Sleep(500);
-            }
-            await Coroutine.Sleep(500);
-            Shop.Close();
-            await Coroutine.Sleep(500);
-          }
-        }
-      ]]>
-    </CodeChunk>
     <CodeChunk Name="GSMGuild">
       <![CDATA[
         ff14bot.Managers.GameObjectManager.GetObjectByNPCId(9).Interact();

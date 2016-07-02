@@ -1,6 +1,7 @@
-using Clio.XmlEngine;
 using TreeSharp;
 using Action = TreeSharp.Action;
+
+using Clio.XmlEngine;
 
 namespace ff14bot.NeoProfiles
 {

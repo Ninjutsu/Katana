@@ -1,4 +1,5 @@
 ﻿using Buddy.Coroutines;
+using TreeSharp;
 
 using Clio.Utilities;
 using Clio.XmlEngine;
@@ -14,8 +15,6 @@ using System.Threading.Tasks;
 
 using ff14bot.Navigation;
 using ff14bot.Objects;
-
-using TreeSharp;
 
 namespace ff14bot.NeoProfiles
 {

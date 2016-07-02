@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE Profile [  
+<!ENTITY Version "Katana">
+<!ENTITY TakitaroCount "198">
+<!ENTITY MinFish "25">
+<!ENTITY MaxFish "35">
+<!ENTITY SitRate "0.42">]>
+<Profile>
+  <Name>Ninjutsu: Takitaro - Urth's Fount - &Version;</Name>
+  <Author>Savannah</Author>
+  <CodeChunks>
+    <CodeChunk name="FishFu"> <!-- Fisher Gearset -->
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+        ff14bot.Managers.ChatManager.SendChat("/gs change 6");
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+  <Order>
+    <If Condition="not(HasAtLeast(5028,&TakitaroCount;)) and HasItem(2627)">
+      <ExLog Color="#00FFFF" Message="Plugins and Gear check."/>
+      <ExEnablePlugins Names="Skywatcher,EnableFlight"/>
+      <If Condition="Core.Me.CurrentJob != ClassJobType.Fisher">
+        <RunCode Name="FishFu"/>
+      </If>
+      <If Condition="not IsOnMap(153)">
+        <TeleportTo Name="Quarrymill" AetheryteId="5" />
+      </If>
+    </If>
+    <While Condition="not(HasAtLeast(5028,&TakitaroCount;)) and HasItem(2627)">
+      <Fish Condition="not(HasAtLeast(5028,&TakitaroCount;)) and FreeItemSlots() &gt; 2" Mooch="1" Stealth="False" ShuffleFishSpots="True" MinFish="&MinFish;" MaxFish="&MaxFish;" SitRate="&SitRate;">
+        <Baits>
+          <Bait Name="Streamer"/>
+        </Baits>
+        <Keepers>
+          <Keeper Name="Takitaro"/>
+        </Keepers>
+        <FishSpots>
+          <FishSpot XYZ="646.0139, 21.59412, 63.62305" Heading="6,035116"/>
+          <FishSpot XYZ="614.311, 21.65874, 52.09377" Heading="0,02090549"/>
+          <FishSpot XYZ="624.0768, 21.66599, 119.7448" Heading="3,063556"/>
+          <FishSpot XYZ="635.6477, 21.68242, 87.19498" Heading="5,363201"/>
+        </FishSpots>
+      </Fish>
+    </While>
+    <If Condition="not HasItem(2627)">
+      <ExLog Color="#00FFFF" Message="You do not have any Streamer Bait Sempai!"/>
+    </If>
+    <If Condition="HasAtLeast(5028,&TakitaroCount;) or FreeItemSlots() &lt; 1">
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Takitaro - Urth's Fount - &Version;" Message="You've assassinated enough Takitaro, or you've run out of inventory space Sempai!"/>
+      <If Condition="not IsOnMap(129)">
+        <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
+      </If>
+    </If>
+  </Order>
+  <CodeChunks>
+    <CodeChunk Name="BreakFishing">
+      <![CDATA[
+        if (FishingManager.State != FishingState.None) { Actionmanager.DoAction(299, Core.Player); }
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+</Profile>
