@@ -6,29 +6,32 @@
   A combat class able to effectively farm lvl 50 mobs
   If you want to farm the mats yourself.
 -->
+<!DOCTYPE Profile [  
+<!ENTITY Version "Katana">
+<!ENTITY SelfRepairEnable "0">
+<!ENTITY SellItems "0">
 
-<!DOCTYPE Profile [
-  <!ENTITY Version "Katana">
-  <!ENTITY SelfRepairEnable "0">
-  <!ENTITY SellItems "0">
-  <!ENTITY EnableMatFarming "1">
-  
-  <!-- Area To Farm Materials (WIP) -->
-  <!ENTITY CastrumOccidens "0">
-  <!ENTITY CastrumOccidens "0">
-  <!ENTITY CastrumOccidens "0">
-  <!ENTITY CastrumOccidens "0">  
-  
-  <!ENTITY CraftCount "1"> <!-- Amount to Craft before Desynth Cycle -->
-  <!ENTITY FC3Count "1"> <!-- Amount of FieldCraft III's -->
+<!ENTITY EnableMatFarming "1">
+
+<!-- Area To Farm Materials (WIP) -->
+<!ENTITY CastrumOccidens "1">
+<!ENTITY Castrum2 "0">
+<!ENTITY Castrum3 "0">
+<!ENTITY Castrum4 "0">
+
+<!-- Amount to Craft before Desynth Cycle -->
+<!ENTITY CraftCount "1">
+
+<!-- Amount of FieldCraft III's Before Stopping -->
+<!ENTITY FC3Count "1">
 ]>
-
 <Profile>
   <Name>Ninjutsu: Rimless Glasses - &Version;</Name>
   <BehaviorDirectory>../Quest Behaviors</BehaviorDirectory>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="KungFu"> <!-- Combat Gearset -->
+    <CodeChunk name="KungFu">
+      <!-- Combat Gearset -->
       <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(3000);
         ff14bot.Managers.ChatManager.SendChat("/gs change 33");
@@ -85,7 +88,7 @@
         <RunCode Name="GSMGuild"/>
       </If>
       <If Condition="IsOnMap(131)">
-        <ExLog Color="#00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="Material Supplies And Junk Selling!"/>
+        <ExLog Color="#00FFFF" Message="Material Supplies And Junk Selling!"/>
         <If Condition="&SellItems; != 0">
           <NSellItems Name="Aistan" SellIds="2931, 5105, 5533, 8144" NpcId="1004419" XYZ="-33.91927, 13.59995, 99.11154"/>
         </If>
@@ -93,7 +96,6 @@
         <BuyItem itemId="5512" itemCount="&CraftCount;" npcId="1004419" XYZ="-33.58521, 13.59985, 96.42175"/>
         <RunCode Name="GemFu"/>
       </If>
-
       <While Condition="not HasAtLeast(8704,&CraftCount;) and FreeItemSlots() &gt; 1">
         <Synthesize RecipeId="2065" MinimumCp="52" HQMats="-1, -1, -1"/>
         <While Condition="CraftingManager.IsCrafting">
@@ -113,6 +115,9 @@
     </If>
     <If Condition="HasAtLeast(8150,&FC3Count;)">
       <ExLog Color="#00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have farmed your desired amount of FieldCraft III's Senpai!"/>
+      <If Condition="not IsOnMap(129)">
+        <TeleportTo Name="Kuji Kiri" AetheryteId="8"/>
+      </If>
     </If>
   </Order>
   <CodeChunks>
