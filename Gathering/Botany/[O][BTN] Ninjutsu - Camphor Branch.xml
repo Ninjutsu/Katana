@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-
-<!DOCTYPE Profile [
-  <!ENTITY Version "Katana">
-  <!ENTITY SkipWindowDelay "1500">
-  <!ENTITY MeditationSpot "8">
-  <!ENTITY BranchCount "495">
-]>
-
+<!DOCTYPE Profile [  
+<!ENTITY Version "Katana">
+<!ENTITY SkipWindowDelay "1500">
+<!ENTITY BranchCount "495">]>
 <Profile>
   <Name>Ninjutsu: Camphor Branches - &Version;</Name>
   <Author>Savannah</Author>
@@ -41,24 +37,23 @@
           <GatherItem Name="Fire Crystal"/>
         </Items>
         <GatherSpots>
-          <!-- Patch 1 -->
           <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="414.6443, 24.20859, 377.4297" nodeLocation="424.5152, 24.38836, 388.4696"/>
-          <!-- Patch 2 -->
           <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="590.4485, 20.78589, 465.0766" nodeLocation="574.6448, 22.42762, 461.2741"/>
-          <!-- Patch 3 -->
           <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="468.0432, 23.61492, 518.4146" nodeLocation="477.2507, 23.54604, 523.494"/>
         </GatherSpots>
         <HotSpots>
-          <HotSpot Radius="60" XYZ="414.6443, 24.20859, 377.4297" name="Mature Tree - Patch 1"/>
-          <HotSpot Radius="60" XYZ="599.3722, 20.26363, 484.9728" name="Mature Tree - Patch 2"/>
-          <HotSpot Radius="60" XYZ="468.0432, 23.61492, 518.4146" name="Mature Tree - Patch 3"/>
+          <HotSpot Radius="60" XYZ="414.6443, 24.20859, 377.4297" Name="Mature Tree - Patch 1"/>
+          <HotSpot Radius="60" XYZ="599.3722, 20.26363, 484.9728" Name="Mature Tree - Patch 2"/>
+          <HotSpot Radius="60" XYZ="468.0432, 23.61492, 518.4146" Name="Mature Tree - Patch 3"/>
         </HotSpots>
         <GatherRotation>RegularNode</GatherRotation>
       </ExGather>
     </While>
     <If Condition="HasAtLeast(14160, &BranchCount;) or FreeItemSlots() &lt; 1">
       <ExLog Color="#00FFFF" Name="Ninjutsu: Camphor Branches - &Version;" Message="Tree Assassination Complete Sempai!"/>
-      <TeleportTo Name="Kuji Kiri" AetheryteId="&MeditationSpot;"/>
+      <If Condition="not IsOnMap(132)">
+        <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
+      </If>
     </If>
   </Order>
 </Profile>
