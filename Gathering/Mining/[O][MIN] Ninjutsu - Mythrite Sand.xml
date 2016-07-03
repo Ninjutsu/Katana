@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Profile [  
+<!ENTITY Version "Katana">
+<!ENTITY SandCount "2000">
+<!ENTITY SkipWindowDelay "1500">]>
+<Profile>
+  <Name>Ninjutsu: Mythrite Sand - &Version;</Name>
+  <Author>Savannah</Author>
+  <CodeChunks>
+    <CodeChunk name="RockFu"> <!-- Miner Gearset -->
+      <![CDATA[
+        ff14bot.Managers.ChatManager.SendChat("/gs change 4");
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+        if(!Core.Player.HasAura(221))
+        {
+        	ff14bot.Managers.Actionmanager.DoAction(2238, Core.Player);
+          await Buddy.Coroutines.Coroutine.Sleep(3000);
+       	}
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+  <Order>
+    <While Condition="not HasAtLeast(12531,&SandCount;) and FreeItemSlots() &gt; 3">
+      <ExLog Color="#00FFFF" Message="Plugins and Gear check!"/>
+      <ExEnablePlugins Names="Enable Flight"/>
+      <RunCode Name="MountDistance"/>
+      <If Condition="Core.Me.CurrentJob != ClassJobType.Miner">
+        <RunCode Name="RockFu"/>
+      </If>
+      <If Condition="not IsOnMap(397)">
+        <TeleportTo Name="Falcons Nest" AetheryteId="71"/>
+        <ExMoveTo Name="Clear Buildings" XYZ="461.176, 212.5399, 699.3445"/>
+        <ExFlyTo Name="Nav Point" XYZ="241.4664, 268.6448, 330.1222"/>
+      </If>
+      <ExGather While="(ItemCount(12531) &lt; &SandCount;) and FreeItemSlots() &gt; 3" DiscoverUnknowns="True" skipWindowDelay="&SkipWindowDelay;" GatherIncrease="Yield">
+        <GatherObjects>
+          <GatherObject>Rocky Outcrop</GatherObject>
+        </GatherObjects>
+        <ItemNames>
+          <ItemName>Mythrite Sand</ItemName>
+        </ItemNames>
+        <GatherSpots>
+          <IndirectApproachGatherSpot ReturnToApproachLocation="False" ApproachLocation="-190.646, 91.5445, -397.8251" nodeLocation="-193.0529, 93.04068, -393.6993"/>
+          <IndirectApproachGatherSpot ReturnToApproachLocation="False" ApproachLocation="-212.8559, 91.7656, -433.5776" nodeLocation="-216.0577, 92.77521, -431.3021"/>
+          <IndirectApproachGatherSpot ReturnToApproachLocation="False" ApproachLocation="-190.416, 91.51896, -397.4136" nodeLocation="-192.0921, 91.29087, -394.3401"/>
+          <IndirectApproachGatherSpot ReturnToApproachLocation="False" ApproachLocation="-336.544, 92.56928, -423.0098" nodeLocation="-334.2118, 93.42142, -422.914"/>
+          <IndirectApproachGatherSpot ReturnToApproachLocation="False" ApproachLocation="-348.0522, 89.52361, -610.3547" nodeLocation="-347.2193, 89.03205, -615.364"/>
+        </GatherSpots>
+        <HotSpots>
+          <HotSpot Radius="60" XYZ="-198.2993, 92.08008, -411.2627" Name="Rocky Outcrop - Patch 1"/>
+          <HotSpot Radius="120" XYZ="-412.3507, 98.56132, -447.1444" Name="Rocky Outcrop - Patch 2"/>
+          <HotSpot Radius="60" XYZ="-328.7137, 95.03205, -610.1688" Name="Rocky Outcrop - Patch 3"/>
+        </HotSpots>
+        <GatherRotation>RegularNode</GatherRotation>
+      </ExGather>
+    </While>
+    <If Condition="HasAtLeast(12531,&SandCount;) or FreeItemSlots() &lt; 2">
+      <ExLog Color="#00FFFF" Name="Ninjutsu!" Message="You've Mined enough Mythrite Sand, or you've run out of inventory space Sempai!"/>
+      <If Condition="not IsOnMap(129)">
+        <TeleportTo Name="Kuji Kiri" AetheryteId="8"/>
+      </If>
+    </If>
+  </Order>
+  <CodeChunks>
+    <CodeChunk Name="MountDistance">
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(250);
+          ff14bot.Settings.CharacterSettings.Instance.MountDistance = 40;
+        await Buddy.Coroutines.Coroutine.Sleep(250);
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+</Profile>
