@@ -63,11 +63,7 @@
   </Order>
   <CodeChunks>
     <CodeChunk Name="MountDistance">
-      <![CDATA[
-        await Buddy.Coroutines.Coroutine.Sleep(250);
-          ff14bot.Settings.CharacterSettings.Instance.MountDistance = 40;
-        await Buddy.Coroutines.Coroutine.Sleep(250);
-      ]]>
+      <![CDATA[ ff14bot.Settings.CharacterSettings.Instance.MountDistance = 40; ]]>
     </CodeChunk>
   </CodeChunks>
 </Profile>
