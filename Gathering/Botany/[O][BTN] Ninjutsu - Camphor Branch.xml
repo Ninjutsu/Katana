@@ -7,8 +7,7 @@
   <Name>Ninjutsu: Camphor Branches - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="BambooFu">
-      <!-- Botanist Gearset -->
+    <CodeChunk name="BambooFu"> <!-- Botanist Gearset -->
       <![CDATA[
         ff14bot.Managers.ChatManager.SendChat("/gs change 5");
         await Buddy.Coroutines.Coroutine.Sleep(3000);
