@@ -7,7 +7,8 @@
   <Name>Ninjutsu: Camphor Branches - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="BambooFu"> <!-- Botanist Gearset -->
+    <CodeChunk name="BambooFu">
+      <!-- Botanist Gearset -->
       <![CDATA[
         ff14bot.Managers.ChatManager.SendChat("/gs change 5");
         await Buddy.Coroutines.Coroutine.Sleep(3000);
@@ -21,7 +22,8 @@
   </CodeChunks>
   <Order>
     <While Condition="not HasAtLeast(14160,&BranchCount;) and FreeItemSlots() &gt; 5">
-      <ExEnablePlugins Names="Skywatcher,EnableFlight"/>
+      <ExEnablePlugins Names="Enable Flight"/>
+      <RunCode Name="MountDistance"/>
       <ExLog Color="#00FFFF" Message="Teleporting to Moghome Sempai!"/>
       <If Condition="not IsOnMap(400)">
         <TeleportTo Name="Moghome" AetheryteId="78"/>
@@ -56,4 +58,9 @@
       </If>
     </If>
   </Order>
+  <CodeChunks>
+    <CodeChunk Name="MountDistance">
+      <![CDATA[ ff14bot.Settings.CharacterSettings.Instance.MountDistance = 40; ]]>
+    </CodeChunk>
+  </CodeChunks>
 </Profile>
