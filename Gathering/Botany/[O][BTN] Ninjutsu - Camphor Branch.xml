@@ -2,7 +2,8 @@
 <!DOCTYPE Profile [  
 <!ENTITY Version "Katana">
 <!ENTITY SkipWindowDelay "1500">
-<!ENTITY BranchCount "495">]>
+<!ENTITY BranchCount "495">
+]>
 <Profile>
   <Name>Ninjutsu: Camphor Branches - &Version;</Name>
   <Author>Savannah</Author>
