@@ -3,14 +3,13 @@
   Author: Savannah
   Required Classes:
   GSM at 50+ - Rimless Glasses Recipe
-  A combat class able to effectively farm lvl 50 mobs
+  A combat class able to farm lvl 50 mobs
   If you want to farm the mats yourself.
 -->
 <!DOCTYPE Profile [  
 <!ENTITY Version "Katana">
 <!ENTITY SelfRepairEnable "0">
 <!ENTITY SellItems "0">
-
 <!ENTITY EnableMatFarming "1">
 
 <!-- Area To Farm Materials (WIP) -->
@@ -18,10 +17,8 @@
 <!ENTITY Castrum2 "0">
 <!ENTITY Castrum3 "0">
 <!ENTITY Castrum4 "0">
-
 <!-- Amount to Craft before Desynth Cycle -->
 <!ENTITY CraftCount "1">
-
 <!-- Amount of FieldCraft III's Before Stopping -->
 <!ENTITY FC3Count "1">
 ]>
@@ -30,8 +27,7 @@
   <BehaviorDirectory>../Quest Behaviors</BehaviorDirectory>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="KungFu">
-      <!-- Combat Gearset -->
+    <CodeChunk name="KungFu"> <!-- Combat Gearset -->
       <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(3000);
         ff14bot.Managers.ChatManager.SendChat("/gs change 33");
@@ -116,7 +112,7 @@
     <If Condition="HasAtLeast(8150,&FC3Count;)">
       <ExLog Color="#00FFFF" Name="Ninjutsu: Rimless Glasses - &Version;" Message="You have farmed your desired amount of FieldCraft III's Senpai!"/>
       <If Condition="not IsOnMap(129)">
-        <TeleportTo Name="Kuji Kiri" AetheryteId="8"/>
+        <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
       </If>
     </If>
   </Order>

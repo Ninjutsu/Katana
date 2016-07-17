@@ -20,7 +20,7 @@
   <Order>
     <If Condition="not(HasAtLeast(5028,&TakitaroCount;)) and HasItem(2627)">
       <ExLog Color="#00FFFF" Message="Plugins and Gear check."/>
-      <ExEnablePlugins Names="Skywatcher,EnableFlight"/>
+      <ExEnablePlugins Names="Skywatcher,Enable Flight"/>
       <If Condition="Core.Me.CurrentJob != ClassJobType.Fisher">
         <RunCode Name="FishFu"/>
       </If>
