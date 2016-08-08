@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Profile [  
 <!ENTITY Version "Katana">
-<!ENTITY SandCount "2000">
-<!ENTITY SkipWindowDelay "1500">]>
+<!ENTITY SkipWindowDelay "1500">
+<!ENTITY SandCount "495">
+]>
 <Profile>
   <Name>Ninjutsu: Mythrite Sand - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="RockFu"> <!-- Miner Gearset -->
+    <CodeChunk name="RockFu">  <!-- Miner Gearset -->
       <![CDATA[
         ff14bot.Managers.ChatManager.SendChat("/gs change 4");
         await Buddy.Coroutines.Coroutine.Sleep(3000);
-        if(!Core.Player.HasAura(221))
+        if(!Core.Player.HasAura(238))
         {
-        	ff14bot.Managers.Actionmanager.DoAction(2238, Core.Player);
+          ff14bot.Managers.Actionmanager.DoAction(238, Core.Player);
           await Buddy.Coroutines.Coroutine.Sleep(3000);
        	}
       ]]>
@@ -32,7 +33,7 @@
         <ExMoveTo Name="Clear Buildings" XYZ="461.176, 212.5399, 699.3445"/>
         <ExFlyTo Name="Nav Point" XYZ="241.4664, 268.6448, 330.1222"/>
       </If>
-      <ExGather While="(ItemCount(12531) &lt; &SandCount;) and FreeItemSlots() &gt; 3" DiscoverUnknowns="True" skipWindowDelay="&SkipWindowDelay;" GatherIncrease="Yield">
+      <ExGather While="(ItemCount(12531) &lt; &SandCount;) and FreeItemSlots() &gt; 3" DiscoverUnknowns="True" GatherIncrease="Yield" skipWindowDelay="&SkipWindowDelay;">
         <GatherObjects>
           <GatherObject>Rocky Outcrop</GatherObject>
         </GatherObjects>
@@ -63,7 +64,11 @@
   </Order>
   <CodeChunks>
     <CodeChunk Name="MountDistance">
-      <![CDATA[ ff14bot.Settings.CharacterSettings.Instance.MountDistance = 40; ]]>
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(250);
+          ff14bot.Settings.CharacterSettings.Instance.MountDistance = 40;
+        await Buddy.Coroutines.Coroutine.Sleep(250);
+      ]]>
     </CodeChunk>
   </CodeChunks>
 </Profile>
