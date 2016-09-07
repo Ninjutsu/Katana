@@ -8,7 +8,7 @@
   <Name>Ninjutsu: Camphor Branches - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="BambooFu">  <!-- Botanist Gearset -->
+    <CodeChunk name="BambooFu"> <!-- Botanist Gearset -->
       <![CDATA[
         ff14bot.Managers.ChatManager.SendChat("/gs change 5");
         await Buddy.Coroutines.Coroutine.Sleep(3000);
@@ -22,14 +22,14 @@
   </CodeChunks>
   <Order>
     <While Condition="not HasAtLeast(14160,&BranchCount;) and FreeItemSlots() &gt; 5">
-      <ExLog Color="#00FFFF" Message="Plugins and Gear check!"/>
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Camphor Branches - &Version;" Message="Plugins and Gear check!"/>
       <ExEnablePlugins Names="Enable Flight"/>
       <RunCode Name="MountDistance"/>
       <If Condition="Core.Me.CurrentJob != ClassJobType.Botanist">
         <RunCode Name="BambooFu"/>
       </If>
       <If Condition="not IsOnMap(400)">
-        <ExLog Color="#00FFFF" Message="Teleporting to Moghome Sempai!"/>
+        <ExLog Color="#00FFFF" Name="Ninjutsu" Message="Teleporting to Moghome Sempai!"/>
         <TeleportTo Name="Moghome" AetheryteId="78"/>
       </If>
       <ExGather Condition="(ItemCount(14160) &lt; &BranchCount;) and FreeItemSlots() &gt; 1" DiscoverUnknowns="True" GatherIncrease="Yield" skipWindowDelay="&SkipWindowDelay;">
@@ -37,38 +37,38 @@
           <GatherObject>Mature Tree</GatherObject>
         </GatherObjects>
         <Items>
-          <GatherItem Name="TimeWorn Dragonskin Map">
-            <GatherItem Name="Camphorwood Branch"/>
-            <!-- <GatherItem Name="Camphorwood Log"/> -->
-            <GatherItem Name="Fire Crystal"/>
-          </Items>
-          <GatherSpots>
-            <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="414.6443, 24.20859, 377.4297" nodeLocation="424.5152, 24.38836, 388.4696"/>
-            <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="590.4485, 20.78589, 465.0766" nodeLocation="574.6448, 22.42762, 461.2741"/>
-            <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="468.0432, 23.61492, 518.4146" nodeLocation="477.2507, 23.54604, 523.494"/>
-          </GatherSpots>
-          <HotSpots>
-            <HotSpot Radius="60" XYZ="414.6443, 24.20859, 377.4297" Name="Mature Tree - Patch 1"/>
-            <HotSpot Radius="60" XYZ="599.3722, 20.26363, 484.9728" Name="Mature Tree - Patch 2"/>
-            <HotSpot Radius="60" XYZ="468.0432, 23.61492, 518.4146" Name="Mature Tree - Patch 3"/>
-          </HotSpots>
-          <GatherRotation>RegularNode</GatherRotation>
-        </ExGather>
-      </While>
-      <If Condition="HasAtLeast(14160, &BranchCount;) or FreeItemSlots() &lt; 1">
-        <ExLog Color="#00FFFF" Name="Ninjutsu: Camphor Branches - &Version;" Message="Tree Assassination Complete Sempai!"/>
-        <If Condition="not IsOnMap(132)">
-          <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
-        </If>
+          <GatherItem Name="TimeWorn Dragonskin Map"/>
+          <GatherItem Name="Camphorwood Branch"/>
+          <!-- <GatherItem Name="Camphorwood Log"/> -->
+          <GatherItem Name="Fire Crystal"/>
+        </Items>
+        <GatherSpots>
+          <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="414.6443, 24.20859, 377.4297" nodeLocation="424.5152, 24.38836, 388.4696"/>
+          <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="590.4485, 20.78589, 465.0766" nodeLocation="574.6448, 22.42762, 461.2741"/>
+          <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="468.0432, 23.61492, 518.4146" nodeLocation="477.2507, 23.54604, 523.494"/>
+        </GatherSpots>
+        <HotSpots>
+          <HotSpot Radius="60" XYZ="414.6443, 24.20859, 377.4297" Name="Mature Tree - Patch 1"/>
+          <HotSpot Radius="60" XYZ="599.3722, 20.26363, 484.9728" Name="Mature Tree - Patch 2"/>
+          <HotSpot Radius="60" XYZ="468.0432, 23.61492, 518.4146" Name="Mature Tree - Patch 3"/>
+        </HotSpots>
+        <GatherRotation>RegularNode</GatherRotation>
+      </ExGather>
+    </While>
+    <If Condition="HasAtLeast(14160, &BranchCount;) or FreeItemSlots() &lt; 1">
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Camphor Branches - &Version;" Message="Tree Assassination Complete Sempai!"/>
+      <If Condition="not IsOnMap(132)">
+        <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
       </If>
-    </Order>
-    <CodeChunks>
-      <CodeChunk Name="MountDistance">
-        <![CDATA[
+    </If>
+  </Order>
+  <CodeChunks>
+    <CodeChunk Name="MountDistance">
+      <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(250);
           ff14bot.Settings.CharacterSettings.Instance.MountDistance = 100;
         await Buddy.Coroutines.Coroutine.Sleep(250);
       ]]>
-      </CodeChunk>
-    </CodeChunks>
-  </Profile>
+    </CodeChunk>
+  </CodeChunks>
+</Profile>
