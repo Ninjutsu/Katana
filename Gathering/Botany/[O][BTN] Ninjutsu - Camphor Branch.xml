@@ -56,7 +56,7 @@
       </ExGather>
     </While>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <If Condition="HasAtLeast(14160, &BranchCount;) or FreeItemSlots() &lt; 1">
+    <If Condition="HasAtLeast(14160,&BranchCount;) or FreeItemSlots() &lt; 1">
       <ExLog Color="#00FFFF" Name="Ninjutsu: Camphor Branches - &Version;" Message="Tree Assassination Complete Sempai!"/>
       <If Condition="not IsOnMap(132)">
         <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>

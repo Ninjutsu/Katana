@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Profile [  
 <!ENTITY Version "Katana">
-<!ENTITY SkipWindowDelay "1500">
 ]>
 <Profile>
   <Name>Ninjutsu: Timeworn Dragonskin Map - &Version;</Name>
   <CodeChunks>
-    <CodeChunk name="BambooJutsu"> <!-- Botanist Gearset -->
+    <CodeChunk name="BambooFu"> <!-- Botanist Gearset -->
       <![CDATA[
         ff14bot.Managers.ChatManager.SendChat("/gs change 5");
         await Buddy.Coroutines.Coroutine.Sleep(3000);
@@ -21,13 +20,15 @@
   <Order>
     <While Condition="not HasItem(12243)">
       <If Condition="not IsOnMap(398)">
-        <TeleportTo Name="Anyx Trine" AetheryteId="77" />
-        <WaitTimer WaitTime="3"/>
+        <ExLog Color="#00FFFF" Name="Ninjutsu: Timeworn Dragonskin Map - &Version;" Message="Treasure Map Hunting!"/>
+        <TeleportTo Name="Anyx Trine" AetheryteId="77"/>
+        <If Condition="Core.Me.CurrentJob != ClassJobType.Botanist">
+          <RunCode Name="BambooFu"/>
+        </If>
       </If>
-      <RunCode Name="BambooJutsu" />
-      <WaitTimer WaitTime="3"/>
-      <ExMoveTo XYZ="-233.587, -28.66997, 163.5846" />
-      <ExGather While="not HasItem(12243)" DiscoverUnknowns="True" skipWindowDelay="&SkipWindowDelay;">
+      <ExMoveTo Name="Getting clear before takeoff Sempai" XYZ="-233.587, -28.66997, 163.5846"/>
+      <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+      <ExGather DiscoverUnknowns="True" skipWindowDelay="1500">
         <GatherObjects>
           <GatherObject>Lush Vegetation Patch</GatherObject>
         </GatherObjects>
@@ -36,7 +37,7 @@
           <GatherItem Name="Fire Crystal"/>
         </Items>
         <GatherSpots>
-          <StealthApproachGatherSpot ReturnToStealthLocation="false" StealthLocation="-690.172, -105.7383, 615.6431" nodeLocation="-680.3677, -104.5265, 624.1502"/>
+          <StealthApproachGatherSpot ReturnToStealthLocation="False" StealthLocation="-690.172, -105.7383, 615.6431" NodeLocation="-680.3677, -104.5265, 624.1502"/>
         </GatherSpots>
         <HotSpots>
           <HotSpot Radius="90" XYZ="-534.8762, -67.35784, 441.3251" name="Lush Vegetation Patch" />
@@ -47,6 +48,7 @@
         <GatherRotation>RegularNode</GatherRotation>
       </ExGather>
     </While>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <If Condition="HasItem(12243)">
       <ExLog Color="#00FFFF" Name="Ninjutsu: Timeworn Dragonskin Map - &Version;" Message="X Marks the spot!"/>
       <If Condition="not IsOnMap(132)">

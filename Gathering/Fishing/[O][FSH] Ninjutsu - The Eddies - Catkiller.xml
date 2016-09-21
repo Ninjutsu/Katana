@@ -2,16 +2,15 @@
 <!DOCTYPE Profile [  
 <!ENTITY Version "Katana">
 <!ENTITY RepairEnable "1">
-<!ENTITY CatkillerCount "198">
+<!ENTITY CatkillerCount "2">
 <!ENTITY MinFish "15">
 <!ENTITY MaxFish "25">
 <!ENTITY SitRate "0.42">
 <!ENTITY ShopPurchase1 "BruteLeech">
-<!ENTITY ShopPurchase1_Count "150">
+<!ENTITY ShopPurchase1_Count "148">
 <!ENTITY ShopPurchase2 "CraneFly">
-<!ENTITY ShopPurchase2_Count "150">
+<!ENTITY ShopPurchase2_Count "148">
 <!ENTITY ShopPurchase3 "HiCordial">
-<!ENTITY ShopPurchase3_Count "33">
 <!ENTITY ShopPurchase3_Count "66">
 ]>
 <Profile>
@@ -33,9 +32,9 @@
       <RunCode Name="FishFu"/>
     </If>
     <While Condition="not HasAtLeast(12829,&CatkillerCount;)">
-      <While Condition="SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(2), 1, 2)">
+      <While Condition="SkywatcherPlugin.IsWeatherInZone(401, 1,2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(2), 1,2)">
         <If Condition="not IsOnMap(401)">
-          <TeleportTo Name="Camp Cloudtop" AetheryteId="72" />
+          <TeleportTo Name="Camp Cloudtop" AetheryteId="72"/>
           <WaitTimer waitTime="3"/>
           <If Condition="&RepairEnable; == 1">
             <ExLog Color="#00FFFF" Message="Ninja Maintenance!"/>
@@ -45,13 +44,13 @@
           </If>
         </If>
         <ExLog Color="#00FFFF" Message="Re-Checking Target Parameters!"/>
-        <If Condition="IsOnMap(401) and(SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2)) and HasAtLeast(12711,49)">
+        <If Condition="IsOnMap(401) and(SkywatcherPlugin.IsWeatherInZone(401, 1,2) or SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1,2)) and HasAtLeast(12711,49)">
           <ExLog Color="#00FFFF" Message="Moving to the Eddies."/>
           <ExMoveTo Name="The Eddies" XYZ="412.5382, -186.4223, 825.4359"/>
           <RunCode Name="Dismount"/>
           <ExDisablePlugins Names="Enable Flight"/>
         </If>
-        <Fish Mooch="1" BaitDelay="500" Patience="Patience" Snagging="False" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" Condition="SkywatcherPlugin.IsWeatherInZone(401, 1, 2) and HasAtLeast(12711,1)">
+        <Fish Mooch="1" BaitDelay="500" Patience="Patience" Snagging="False" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" Condition="SkywatcherPlugin.IsWeatherInZone(401, 1,2) and HasAtLeast(12711,1)">
           <Baits>
             <Bait name="Brute Leech"/>
           </Baits>
@@ -71,7 +70,7 @@
         </Fish>
       </While>
       <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-      <While Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) or ItemCount(12711) &lt; 50">
+      <While Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1,2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1,2) or ItemCount(12711) &lt; 50">
         <ExLog Color="#00FFFF" message="Illuminati Perch fishing!"/>
         <If condition="not IsOnMap(399)">
           <TeleportTo name="Idyllshire" aetheryteId="75"/>
@@ -83,7 +82,7 @@
         <ExMoveTo XYZ="-136.0699, 100.6697, -177.1059"/>
         <RunCode Name="Dismount"/>
         <ExDisablePlugins Names="Enable Flight"/>
-        <Fish Mooch="1" MinFish="&MinFish;" MaxFish="&MaxFish;" Patience="Patience" ShuffleFishSpots="True" SitRate="&SitRate;" Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1, 2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1, 2) and FreeItemSlots() &gt; 3">
+        <Fish Mooch="1" MinFish="&MinFish;" MaxFish="&MaxFish;" Patience="Patience" ShuffleFishSpots="True" SitRate="&SitRate;" Condition="not SkywatcherPlugin.IsWeatherInZone(401, 1,2) or not SkywatcherPlugin.PredictWeatherInZone(401, TimeSpan.FromHours(1), 1,2) and FreeItemSlots() &gt; 3">
           <Baits>
             <Bait name="Brute Leech" Condition="Core.Player.HasAura(850)"/>
             <Bait name="Goblin Jig"/>
