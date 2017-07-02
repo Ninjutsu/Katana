@@ -7,7 +7,7 @@
 
 <Profile>
   <Name>Ninjutsu: Navigator's Brand - &Version;</Name>
-  <BehaviorDirectory>../Quest Behaviors</BehaviorDirectory>
+  <BehaviorDirectory>../../Quest Behaviors</BehaviorDirectory>
   <Author>Savannah</Author>
   <CodeChunks>
     <CodeChunk name="FishFu">
