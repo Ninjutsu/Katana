@@ -11,7 +11,7 @@
         await Buddy.Coroutines.Coroutine.Sleep(3000);
           if(!Core.Player.HasAura(221))
           {
-          	ff14bot.Managers.Actionmanager.DoAction(221, Core.Player);
+          	ff14bot.Managers.ActionManager.DoAction(221, Core.Player);
             await Buddy.Coroutines.Coroutine.Sleep(3000);
          	}
       ]]>
