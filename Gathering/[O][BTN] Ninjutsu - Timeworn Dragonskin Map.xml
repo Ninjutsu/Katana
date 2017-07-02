@@ -5,7 +5,7 @@
 <Profile>
   <Name>Ninjutsu: Timeworn Dragonskin Map - &Version;</Name>
   <CodeChunks>
-    <CodeChunk name="BambooFu"> <!-- Botanist Gearset -->
+    <CodeChunk name="BambooFu">
       <![CDATA[
         ff14bot.Managers.ChatManager.SendChat("/gs change 5");
         await Buddy.Coroutines.Coroutine.Sleep(3000);
@@ -22,13 +22,14 @@
       <If Condition="not IsOnMap(398)">
         <ExLog Color="#00FFFF" Name="Ninjutsu: Timeworn Dragonskin Map - &Version;" Message="Treasure Map Hunting!"/>
         <TeleportTo Name="Anyx Trine" AetheryteId="77"/>
+        <ExEnablePlugins Names="EnableFlight"/>
         <If Condition="Core.Me.CurrentJob != ClassJobType.Botanist">
           <RunCode Name="BambooFu"/>
         </If>
+          <ExMoveTo Name="Getting clear before takeoff Sempai" XYZ="-233.587, -28.66997, 163.5846"/>
       </If>
-      <ExMoveTo Name="Getting clear before takeoff Sempai" XYZ="-233.587, -28.66997, 163.5846"/>
       <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-      <ExGather DiscoverUnknowns="True" skipWindowDelay="1500">
+      <ExGather DiscoverUnknowns="True" skipWindowDelay="1500" While="not HasItem(12243)">
         <GatherObjects>
           <GatherObject>Lush Vegetation Patch</GatherObject>
         </GatherObjects>
