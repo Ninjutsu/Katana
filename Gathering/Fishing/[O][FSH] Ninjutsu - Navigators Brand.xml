@@ -5,22 +5,12 @@
 <!ENTITY NavigatorCount "5">
 ]>
 
-<!-- Misc Info
-Location - <-466.4225, 23.47034, -379.8734>
-Name - Merchant & Mender
-NPC ID - 1004038 DialogOption="1"
-Floating Minnow
-
-Camp Westwind:
--510.0703, 50.10225, -701.4601
- -->
-
 <Profile>
   <Name>Ninjutsu: Navigator's Brand - &Version;</Name>
   <BehaviorDirectory>../Quest Behaviors</BehaviorDirectory>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="FishFu"> <!-- Fisher Gearset -->
+    <CodeChunk name="FishFu">
       <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(3000);
         ff14bot.Managers.ChatManager.SendChat("/gs change 6");
@@ -50,6 +40,10 @@ Camp Westwind:
         <Baits>
           <Bait Name="Yumizuno"/>
         </Baits>
+        <PatienceTugs>
+          <PatienceTug moochLevel="0" TugType="Heavy"/>
+          <PatienceTug moochLevel="1" TugType="Heavy"/>
+        </PatienceTugs>
         <Keepers>
           <Keeper name="Navigator's Brand"/>
           <Keeper name="Rothlyt Oyster"/>
@@ -73,7 +67,7 @@ Camp Westwind:
       <ExLog Color="#00FFFF" Message="It is now the right time of day!"/>
     </While>
     <If Condition="HasAtLeast(7693, &NavigatorCount;) or FreeItemSlots() &lt; 1">
-      <ExLog Color="#00FFFF" Name="Ninjutsu: Navigator's Brand - &Version;" Message="You've assassinated &NavigatorCount;+ Navigator's Brand Senpai!"/>
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Navigator's Brand - &Version;" Message="You've assassinated &NavigatorCount;+ Navigator's Brand Sempai!"/>
       <If Condition="not IsOnMap(129)">
         <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
       </If>
