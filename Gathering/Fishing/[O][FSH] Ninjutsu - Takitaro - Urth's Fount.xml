@@ -9,7 +9,8 @@
   <Name>Ninjutsu: Takitaro - Urth's Fount - &Version;</Name>
   <Author>Savannah</Author>
   <CodeChunks>
-    <CodeChunk name="FishFu"> <!-- Fisher Gearset -->
+    <CodeChunk name="FishFu">
+      <!-- Fisher Gearset -->
       <![CDATA[
         await Buddy.Coroutines.Coroutine.Sleep(3000);
         ff14bot.Managers.ChatManager.SendChat("/gs change 6");
@@ -20,7 +21,7 @@
   <Order>
     <If Condition="not(HasAtLeast(5028,&TakitaroCount;)) and HasItem(2627)">
       <ExLog Color="#00FFFF" Message="Plugins and Gear check."/>
-      <ExEnablePlugins Names="Skywatcher,Enable Flight"/>
+      <ExEnablePlugins Names="Skywatcher"/>
       <If Condition="Core.Me.CurrentJob != ClassJobType.Fisher">
         <RunCode Name="FishFu"/>
       </If>
@@ -49,9 +50,7 @@
     </If>
     <If Condition="HasAtLeast(5028,&TakitaroCount;) or FreeItemSlots() &lt; 1">
       <ExLog Color="#00FFFF" Name="Ninjutsu: Takitaro - Urth's Fount - &Version;" Message="You've assassinated enough Takitaro, or you've run out of inventory space Sempai!"/>
-      <If Condition="not IsOnMap(129)">
-        <TeleportTo Name="Kuji Kiri" AetheryteId="2"/>
-      </If>
+      <TeleportTo Name="Kuji Kiri" AetheryteId="60"/>
     </If>
   </Order>
   <CodeChunks>
