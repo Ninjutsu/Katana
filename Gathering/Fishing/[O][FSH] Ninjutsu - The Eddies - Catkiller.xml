@@ -159,7 +159,7 @@
         if (MovementManager.IsFlying) { result = await CommonTasks.Land();
           await Buddy.Coroutines.Coroutine.Sleep(2000);
         }
-        if (result && Core.Player.IsMounted) { Actionmanager.Dismount();
+        if (result && Core.Player.IsMounted) { ActionManager.Dismount();
           await Buddy.Coroutines.Coroutine.Sleep(2000);
         }
       ]]>
