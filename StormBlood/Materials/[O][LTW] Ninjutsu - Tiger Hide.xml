@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Profile [
 <!ENTITY Version "Katana">
-<!ENTITY TigerSkinCount "198">
+<!ENTITY SkinCount "198">
 ]>
 <Profile>
 	<Name>[O] Ninjutsu: Yanxian Tiger - Tiger Hide</Name>
 	<Author>Savannah</Author>
-	<KillRadius>400</KillRadius>
+	<KillRadius>250</KillRadius>
 	<Order>
 		<If Condition="True">
 			<If Condition="not IsOnMap(614) and (ItemCount(20001) &lt; &TigerSkinCount;)">
@@ -15,7 +15,7 @@
 			</If>
 			<If Condition="IsOnMap(614)">
 				<ExMoveTo XYZ="685.9728, 72.7261, -181.3846" />
-				<While Condition="&Gazelle; != 0 and (ItemCount(20001) &lt; &TigerSkinCount;)">
+				<While Condition="ItemCount(20001) &lt; &SkinCount;">
 					<Grind grindRef="Yanxian Tiger" While="Core.Player.ClassLevel &lt; 71" />
 				</While>
 			</If>
@@ -24,9 +24,9 @@
 	<GrindAreas>
 		<GrindArea name="Yanxian Tiger">
 			<Hotspots>
-				<Hotspot Radius="400" XYZ="685.9728, 72.7261, -181.3846" name="Yanxian Tiger A" />
-				<Hotspot Radius="400" XYZ="754.3163, 103.2602, -295.911" name="Yanxian Tiger B" />
-				<Hotspot Radius="400" XYZ="806.8074, 106.4324, -258.3004" name="Yanxian Tiger C" />
+				<Hotspot Radius="250" XYZ="685.9728, 72.7261, -181.3846" name="Yanxian Tiger A" />
+				<Hotspot Radius="250" XYZ="754.3163, 103.2602, -295.911" name="Yanxian Tiger B" />
+				<Hotspot Radius="250" XYZ="806.8074, 106.4324, -258.3004" name="Yanxian Tiger C" />
 			</Hotspots>
 			<TargetMobs>
 				<TargetMob Name="Yanxian Tiger" Id="5760" />

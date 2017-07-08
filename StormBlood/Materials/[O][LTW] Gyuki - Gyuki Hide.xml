@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Profile [
+<!ENTITY Version "Katana">
+<!ENTITY SkinCount "198">
+]>
+<Profile>
+	<Name>[O] Ninjutsu: Gyuki - Gyuki Hide</Name>
+	<Author>Savannah</Author>
+	<KillRadius>250</KillRadius>
+	<Order>
+		<If Condition="True">
+			<If Condition="not IsOnMap(613) and (ItemCount(20000) &lt; &SkinCount;)">
+				<ExLog Color="#00FFFF" Name="Ninjutsu: Rasen Kaikyo - &Version;" Message="Moving to The Peaks!"/>
+				<TeleportTo Name="Ala Gannha" AetheryteId="100" />
+			</If>
+			<If Condition="IsOnMap(613)">
+				<ExMoveTo XYZ="-188.8231, 0.9775938, -623.646" />
+				<While Condition="ItemCount(20000) &lt; &SkinCount;">
+					<Grind grindRef="Rasen Kaikyo" While="Core.Player.ClassLevel &lt; 71" />
+				</While>
+			</If>
+		</If>
+	</Order>
+	<GrindAreas>
+		<GrindArea name="Rasen Kaikyo">
+			<Hotspots>
+				<Hotspot Radius="250" XYZ="-188.8231, 0.9775938, -623.646" name="Gyuki A" />
+				<Hotspot Radius="250" XYZ="-307.5173, -0.313343, -546.4163" name="Gyuki B" />
+				<Hotspot Radius="250" XYZ="-415.8778, 3.425954, -537.9185" name="Gyuki C" />
+			</Hotspots>
+			<TargetMobs>
+				<TargetMob Name="Gyuki" Id="5734" />
+			</TargetMobs>
+			<MinLevel>1</MinLevel>
+			<MaxLevel>61</MaxLevel>
+		</GrindArea>
+	</GrindAreas>
+</Profile>
