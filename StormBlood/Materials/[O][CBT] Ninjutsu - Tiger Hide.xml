@@ -4,8 +4,8 @@
 <!ENTITY SkinCount "198">
 ]>
 <Profile>
-	<Name>[O] Ninjutsu: Yanxian Tiger - Tiger Hide</Name>
 	<Author>Savannah</Author>
+	<Name>[O][CBT] Ninjutsu: Yanxian Tiger - Tiger Hide</Name>
 	<KillRadius>250</KillRadius>
 	<Order>
 		<If Condition="True">

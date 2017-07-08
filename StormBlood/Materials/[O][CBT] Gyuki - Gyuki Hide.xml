@@ -4,8 +4,8 @@
 <!ENTITY SkinCount "198">
 ]>
 <Profile>
-	<Name>[O] Ninjutsu: Gyuki - Gyuki Hide</Name>
 	<Author>Savannah</Author>
+	<Name>[O][CBT] Ninjutsu: Gyuki - Gyuki Hide</Name>
 	<KillRadius>250</KillRadius>
 	<Order>
 		<If Condition="True">

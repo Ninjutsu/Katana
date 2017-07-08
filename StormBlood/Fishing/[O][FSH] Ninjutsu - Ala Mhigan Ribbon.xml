@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Profile [
+<!ENTITY Version "Katana">
+<!ENTITY MinFish "15">
+<!ENTITY MaxFish "25">
+<!ENTITY SitRate "0.42">
+<!ENTITY MeditationSpot "1">
+]>
+<Profile>
+  <Author>Savannah</Author>
+  <Name>[O][FSH] Ninjutsu: Ala Mhigan Ribbon</Name>
+  <CodeChunks>
+    <CodeChunk name="FishFu">
+      <![CDATA[
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+        ff14bot.Managers.ChatManager.SendChat("/gs change 6");
+        await Buddy.Coroutines.Coroutine.Sleep(3000);
+      ]]>
+    </CodeChunk>
+  </CodeChunks>
+  <Order>
+    <RunCode Name="FishFu" />
+    <If Condition="not IsOnMap(620)">
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Ala Mhigan Ribbon - &Version;" Message="Moving to The Peaks!"/>
+      <TeleportTo Name="Ala Ghiri" AetheryteId="101" />
+    </If>
+    <If Condition="IsOnMap(620)">
+      <ExLog Color="#00FFFF" Name="Ninjutsu: Ala Mhigan Ribbon - &Version;" Message="Moving to The Fishing Area!"/>
+      <ExMoveTo Name="Fishing Area" XYZ="-607.3864, 306.4372, 777.4971" />
+    </If>
+    <While Condition="True">
+      <ExFish Mooch="1" Patience="Patience" MinFish="&MinFish;" MaxFish="&MaxFish;" ShuffleFishSpots="True" SitRate="&SitRate;">
+        <Baits>
+          <Bait name="Suspending Minnow" />
+        </Baits>
+        <Collectables>
+          <Collectable name="Ala Mhigan Ribbon" value="42" />
+        </Collectables>
+        <PatienceTugs>
+          <PatienceTug moochLevel="0" TugType="Light" />
+          <PatienceTug moochLevel="0" TugType="Medium" />
+          <PatienceTug moochLevel="1" TugType="Heavy" />
+        </PatienceTugs>
+        <FishSpots>
+          <FishSpot XYZ="-614.8542, 306.6049, 745.2111" Heading="4.766753" />
+          <FishSpot XYZ="-606.4812, 306.4372, 744.2242" Heading="3.139807" />
+          <FishSpot XYZ="-600.1526, 306.6049, 747.4906" Heading="1.637156" />
+          <FishSpot XYZ="-613.9949, 306.4161, 760.191" Heading="5.051269" />
+          <FishSpot XYZ="-600.8033, 306.2335, 780.3856" Heading="1.880357" />
+        </FishSpots>
+      </ExFish>
+    </While>
+  </Order>
+</Profile>

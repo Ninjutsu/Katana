@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Profile [
+<!ENTITY Version "Katana">
+<!ENTITY MothCount "198">
+]>
+<Profile>
+	<Author>Savannah</Author>
+	<Name>[O][CBT] Nijutsu: Fluturini - Moth Scales</Name>
+	<KillRadius>250</KillRadius>
+	<Order>
+		<If Condition="True">
+			<If Condition="not IsOnMap(620) and (ItemCount(19922) &lt; &MothCount;)">
+				<ExLog Color="#00FFFF" Name="Ninjutsu: Steppe Dzo - &Version;" Message="Moving to The Peaks!"/>
+				<TeleportTo Name="Ala Gannha" AetheryteId="100" />
+			</If>
+			<If Condition="IsOnMap(620)">
+				<ExMoveTo XYZ="-458.7588, 59.21199, -552.9448" />
+				<While Condition="ItemCount(19922) &lt; &MothCount;">
+					<Grind grindRef="Fluturini" While="Core.Player.ClassLevel &lt; 71" />
+				</While>
+			</If>
+		</If>
+	</Order>
+	<GrindAreas>
+		<GrindArea name="Fluturini">
+			<Hotspots>
+				<Hotspot Radius="250" XYZ="-458.7588, 59.21199, -552.9448" name="Fluturini A" />
+				<Hotspot Radius="250" XYZ="-495.153, 64.20566, -489.5445" name="Fluturini B" />
+				<Hotspot Radius="250" XYZ="-600.9899, 67.68816, -396.8286" name="Fluturini C" />
+			</Hotspots>
+			<TargetMobs>
+				<TargetMob Name="Fluturini" Id="5702" />
+			</TargetMobs>
+			<MinLevel>1</MinLevel>
+			<MaxLevel>61</MaxLevel>
+		</GrindArea>
+	</GrindAreas>
+</Profile>
