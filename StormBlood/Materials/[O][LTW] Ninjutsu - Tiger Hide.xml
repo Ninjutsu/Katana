@@ -9,7 +9,7 @@
 	<KillRadius>250</KillRadius>
 	<Order>
 		<If Condition="True">
-			<If Condition="not IsOnMap(614) and (ItemCount(20001) &lt; &TigerSkinCount;)">
+			<If Condition="not IsOnMap(614) and (ItemCount(20001) &lt; &SkinCount;)">
 				<ExLog Color="#00FFFF" Name="Ninjutsu: Yanxian Tigers - &Version;" Message="Moving to Yanxia!"/>
 				<TeleportTo Name="Yanxia" AetheryteId="107" />
 			</If>
